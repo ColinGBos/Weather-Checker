@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Weather Viewer</title>
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="header">
+                    <h1>Find Your City!</h1>
+                    <form action="/find" method="post">
+                        <input type="text" name="city" placeholder="Calgary" />
+                        <input type="submit" value="submit" />
+                    </form>
+                </div>
+            </header>
+
+            <div class="container">
+                <% if (locals.data) { %> <% data.forEach(entry => { %>
+                <div class="card">
+                    <div class="top">
+                        <h2><%= entry.city %></h2>
+                        <p><%= entry.time %></p>
+                    </div>
+
+                    <div class="info">
+                        <div class="col1">
+                            <img
+                                src="https://openweathermap.org/img/wn/<%= entry.icon %>@2x.png"
+                                alt="Weather icon: <%= entry.icon %>"
+                                height="100"
+                                width="100"
+                            />
+                        </div>
+
+                        <div class="col2">
+                            <p>Longitude: <%= entry.lon %> | Latitude: <%= entry.lat %></p>
+                            <p>Summary: <%= entry.desc %></p>
+                            <p>Humidity: <%= entry.humidity %></p>
+                            <p>Temperature: <%= entry.temp %></p>
+                            <p>Feels Like: <%= entry.feels %></p>
+                        </div>
+                    </div>
+                </div>
+                <% }) %> <% } %>
+            </div>
+        </main>
+    </body>
+</html>
